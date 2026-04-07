@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2015</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<button class="hamburger" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+
+<aside class="sidebar" id="sidebar">
+<div class="sidebar-header"><a href="../index.html" class="logo">段永平智慧库</a><div class="logo-sub">大道无形我有型</div></div>
+<div class="sidebar-nav">
+<a href="../index.html" class="nav-link nav-home">🏠 首页</a>
+<div class="nav-group">
+<div class="nav-group-title" onclick="toggle('grp_sayings')"><span class="caret"></span>投资箴言</div>
+<div class="nav-group-items" id="grp_sayings"><a href="../sayings/index.html" class="nav-link">投资箴言总览</a></div>
+</div>
+<div class="nav-group">
+<div class="nav-group-title" onclick="toggle('grp_blog')"><span class="caret"></span>博客文章</div>
+<div class="nav-group-items" id="grp_blog"><a href="../blog/index.html" class="nav-link">博客文章合集</a></div>
+</div>
+<div class="nav-group">
+<div class="nav-group-title" onclick="toggle('grp_weibo')"><span class="caret"></span>微博语录</div>
+<div class="nav-group-items" id="grp_weibo"><a href="../weibo/index.html" class="nav-link">微博语录</a></div>
+</div>
+<div class="nav-group">
+<div class="nav-group-title" onclick="toggle('grp_qa')"><span class="caret"></span>投资问答</div>
+<div class="nav-group-items" id="grp_qa"><a href="../qa/index.html" class="nav-link">投资问答总览</a></div>
+</div>
+<div class="nav-group">
+<div class="nav-group-title" onclick="toggle('grp_interview')"><span class="caret"></span>访谈记录</div>
+<div class="nav-group-items" id="grp_interview"><a href="../interview/index.html" class="nav-link">访谈记录</a></div>
+</div>
+<div class="nav-group">
+<div class="nav-group-title" onclick="toggle('grp_speech')"><span class="caret"></span>演讲分享</div>
+<div class="nav-group-items" id="grp_speech"><a href="../speech/index.html" class="nav-link">演讲分享</a></div>
+</div>
+</div>
+</aside>
+
+<main class="main">
+<div class="meta">
+<span class="type-badge type-其他">其他</span>
+<span class="date-tag">2015</span>
+</div>
+<article class="article">
+<h1>2015年投资箴言</h1>
+
+<h2>精选问答</h2>
+
+<p>（从原始资料中提取）</p>
+
+<h2>涉及公司</h2>
+
+<h2>核心观点</h2>
+
+
+<h2>原文摘录（5条）</h2>
+
+<p>1. 原始文档: 段永平投资箴言2015年.md 段永平投资箴言2015年 段永平投资箴言／2015 年 2015－01...</p>
+
+<p>2. 条条道路都可能通罗马，这里是一条"未必”最好但肯定能到的。“未 必”最好但肯定能到的潜台词就是：这是唯一肯定能到的路。...</p>
+
+<p>3. （高成长高市盈率的公司，好像就没有便宜过的时候，追还是不 追？）段：看得懂的公司就没这个问题。最重要的是要想明白五年十 年后这个公司是什么，别想市场会怎么看。...</p>
+
+<p>4. 投资没有充分条件。你的七八成把握指的是什么很重要。如果你 指的是你对 10 年后公司的理解，那把握度就是你的安全边际。投资 里没搞明白的东西往往是带来麻烦的东西。...</p>
+
+<p>5. 茅台如果能够做到让消费者放心地买到绝对的真酒，投个十个八 个亿都是极为合算的。茅台应该学学法国红酒的做法，让每一瓶酒都 成为年份酒--每一瓶酒上都写明出厂年份。以后大家喝 53 度茅台前会 说今天喝的是哪年哪年的茅台，而不仅仅是茅台哈。现在的年份在酒 瓶上实在是不起眼。...</p>
+
+
+</article>
+</main>
+<script>
+function toggle(id) {
+    const el = document.getElementById(id);
+    const title = el.previousElementSibling;
+    el.classList.toggle('open');
+    title.classList.toggle('open');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2018</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<button class="hamburger" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+
+<aside class="sidebar" id="sidebar">
+<div class="sidebar-header"><a href="../index.html" class="logo">段永平智慧库</a><div class="logo-sub">大道无形我有型</div></div>
+<div class="sidebar-nav">
+<a href="../index.html" class="nav-link nav-home">🏠 首页</a>
+<div class="nav-group">
+<div class="nav-group-title" onclick="toggle('grp_sayings')"><span class="caret"></span>投资箴言</div>
+<div class="nav-group-items" id="grp_sayings"><a href="../sayings/index.html" class="nav-link">投资箴言总览</a></div>
+</div>
+<div class="nav-group">
+<div class="nav-group-title" onclick="toggle('grp_blog')"><span class="caret"></span>博客文章</div>
+<div class="nav-group-items" id="grp_blog"><a href="../blog/index.html" class="nav-link">博客文章合集</a></div>
+</div>
+<div class="nav-group">
+<div class="nav-group-title" onclick="toggle('grp_weibo')"><span class="caret"></span>微博语录</div>
+<div class="nav-group-items" id="grp_weibo"><a href="../weibo/index.html" class="nav-link">微博语录</a></div>
+</div>
+<div class="nav-group">
+<div class="nav-group-title" onclick="toggle('grp_qa')"><span class="caret"></span>投资问答</div>
+<div class="nav-group-items" id="grp_qa"><a href="../qa/index.html" class="nav-link">投资问答总览</a></div>
+</div>
+<div class="nav-group">
+<div class="nav-group-title" onclick="toggle('grp_interview')"><span class="caret"></span>访谈记录</div>
+<div class="nav-group-items" id="grp_interview"><a href="../interview/index.html" class="nav-link">访谈记录</a></div>
+</div>
+<div class="nav-group">
+<div class="nav-group-title" onclick="toggle('grp_speech')"><span class="caret"></span>演讲分享</div>
+<div class="nav-group-items" id="grp_speech"><a href="../speech/index.html" class="nav-link">演讲分享</a></div>
+</div>
+</div>
+</aside>
+
+<main class="main">
+<div class="meta">
+<span class="type-badge type-其他">其他</span>
+<span class="date-tag">2018</span>
+</div>
+<article class="article">
+<h1>2018年投资箴言</h1>
+
+<h2>精选问答</h2>
+
+<p>（从原始资料中提取）</p>
+
+<h2>涉及公司</h2>
+
+<h2>核心观点</h2>
+
+
+<h2>原文摘录（5条）</h2>
+
+<p>1. 原始文档: 段永平投资箴言2018年.md 段永平投资箴言2018年 段永平投资箴言 年 /2018 段永平投资箴言/2018年 我觉得模糊的正确指的就是定性的重要性，或者甚至也可以说 " 是要先做对的事情。 年如果能懂大道的这句话，很多人就不会掉 "2018 进精确的错误这个坑里。不过，现在懂也不晚！ 年，继续前 “ ” 2019 行，做对的事情，把事情做对。感谢大道！！ － 2018 01...</p>
+
+<p>2. 3%？）个人认为 是因为产品足够好而导致的换机周期拉长了。最典型的表现就是 iPad， 很多人买了以后会一直用，不需要每年换。最早一到两年买个新 iPad 就慢慢会变成四到五年才买一个。手机已经也已经有点这个味道了。比 如用 iPhone6 的人一般都不急着换 6s 或 7，不过换 8 或 X 的人的比例 就高了不少。...</p>
+
+<p>3. （巴菲特说“如开始就成功，就不要另觅他途”，是什么意思？）你羽 毛球打得好，很赚钱，于是改打 golf？大概没人愿意这样吧。任何成功 都是不容易的，另觅他途的代价太大了。...</p>
+
+<p>4. 如果你觉得好的投资机会为什么只拿出 5-10%呢？留钱干什么？要 么就是你觉得这是投机，所以只放 5-10%？...</p>
+
+<p>5. 市值低于现金的公司千万要小心，和投资别的公司一样小心就好！ 一眼看上去市值低于现金的公司确实经常是值得花时间去看的，但多数 情况下这未必就是便宜货。 、多数人的问题是：算得太多而想的太少。拿点小钱试试没啥不可， 8 但你想试的是什么？市场的走势？...</p>
+
+
+</article>
+</main>
+<script>
+function toggle(id) {
+    const el = document.getElementById(id);
+    const title = el.previousElementSibling;
+    el.classList.toggle('open');
+    title.classList.toggle('open');
+}
+</script>
+</body>
+</html>

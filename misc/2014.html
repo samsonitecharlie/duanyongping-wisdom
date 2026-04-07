@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2014</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<button class="hamburger" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+
+<aside class="sidebar" id="sidebar">
+<div class="sidebar-header"><a href="../index.html" class="logo">段永平智慧库</a><div class="logo-sub">大道无形我有型</div></div>
+<div class="sidebar-nav">
+<a href="../index.html" class="nav-link nav-home">🏠 首页</a>
+<div class="nav-group">
+<div class="nav-group-title" onclick="toggle('grp_sayings')"><span class="caret"></span>投资箴言</div>
+<div class="nav-group-items" id="grp_sayings"><a href="../sayings/index.html" class="nav-link">投资箴言总览</a></div>
+</div>
+<div class="nav-group">
+<div class="nav-group-title" onclick="toggle('grp_blog')"><span class="caret"></span>博客文章</div>
+<div class="nav-group-items" id="grp_blog"><a href="../blog/index.html" class="nav-link">博客文章合集</a></div>
+</div>
+<div class="nav-group">
+<div class="nav-group-title" onclick="toggle('grp_weibo')"><span class="caret"></span>微博语录</div>
+<div class="nav-group-items" id="grp_weibo"><a href="../weibo/index.html" class="nav-link">微博语录</a></div>
+</div>
+<div class="nav-group">
+<div class="nav-group-title" onclick="toggle('grp_qa')"><span class="caret"></span>投资问答</div>
+<div class="nav-group-items" id="grp_qa"><a href="../qa/index.html" class="nav-link">投资问答总览</a></div>
+</div>
+<div class="nav-group">
+<div class="nav-group-title" onclick="toggle('grp_interview')"><span class="caret"></span>访谈记录</div>
+<div class="nav-group-items" id="grp_interview"><a href="../interview/index.html" class="nav-link">访谈记录</a></div>
+</div>
+<div class="nav-group">
+<div class="nav-group-title" onclick="toggle('grp_speech')"><span class="caret"></span>演讲分享</div>
+<div class="nav-group-items" id="grp_speech"><a href="../speech/index.html" class="nav-link">演讲分享</a></div>
+</div>
+</div>
+</aside>
+
+<main class="main">
+<div class="meta">
+<span class="type-badge type-其他">其他</span>
+<span class="date-tag">2014</span>
+</div>
+<article class="article">
+<h1>2014年投资箴言</h1>
+
+<h2>精选问答</h2>
+
+<p>（从原始资料中提取）</p>
+
+<h2>涉及公司</h2>
+
+<h2>核心观点</h2>
+
+
+<h2>原文摘录（5条）</h2>
+
+<p>1. 原始文档: 段永平投资箴言2014年.md 段永平投资箴言2014年 段永平投资箴言 年 /2014 做对的事情，把事情做对。指的就是发现是错的事情就要改，不 管多大的代价都会是最小的代价。 大道 —— 2014-01...</p>
+
+<p>2. 茅台的文化中好的那部分不是来自国企，但不好的那部分确实好像 有关系。多数企业一旦有了某年要冲多少亿的目标后，或多或少就可能 会对质量产生影响。有时候感觉他们好像自认为手里同时有着什么都可 以刺穿的矛和什么都刺不穿的盾。...</p>
+
+<p>3. “茅台酒质量铁律 “ 四服从原则 ” 已经广为人知，即产量服从质量、速 度服从质量、成本服从质量、效益服从质量。无论是过去还是现在，国 酒茅台始终不渝地把产品质量视同为与生命一样重要。在市场旺需的情 况下，茅台从不为绩效显著的利益诱惑而产生短见和浮躁，当产量与质 量、效益与质量、速度与质量、成本与质量这四对矛盾尖锐对立的时候， 茅台始终坚定不移地严守"四个服从"，把保持和发扬国酒茅台的质量摆 在首位，而产量、效益、速度、成本始终都摆在以质量第一为前提之下 的从属地位，一切服从于质量。“不挖老窖，不卖新酒”、“出厂酒品酒龄 至少在 5 年以上”，都显示着茅台人对茅台酒品质的苛刻追求。”段：作 为...</p>
+
+<p>4. 我认为茅台应该做减法而不是加法。好像茅台正在做的也有点这个 意思，慢慢地把非 53 度飞天的酒分出上市公司。...</p>
+
+<p>5. （为什么老巴说买卖股票你都不应基于宏观经济的预测?）段：你如 果能用 10 年的眼光看企业你就明白了。想想 10 年后。...</p>
+
+
+</article>
+</main>
+<script>
+function toggle(id) {
+    const el = document.getElementById(id);
+    const title = el.previousElementSibling;
+    el.classList.toggle('open');
+    title.classList.toggle('open');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时间线 | 段永平投资智慧库</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #faf9f6;
+            --bg-secondary: #f5f4f0;
+            --text: #2c2c2c;
+            --text-secondary: #5a5a5a;
+            --text-muted: #888;
+            --accent: #8b4513;
+            --accent-light: #d4a574;
+            --border: #e0ddd5;
+            --link: #8b4513;
+            --link-hover: #a0522d;
+            --phase1-bg: #fef9f3;
+            --phase2-bg: #f3f8fe;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+        }
+        .top-nav {
+            background: #fff;
+            border-bottom: 1px solid var(--border);
+            padding: 0 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            height: 60px;
+        }
+        .nav-brand {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            margin-right: 40px;
+        }
+        .nav-brand span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-left: 8px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            min-height: calc(100vh - 60px);
+        }
+        .sidebar {
+            width: 280px;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border);
+            padding: 30px 24px;
+            position: sticky;
+            top: 60px;
+            height: calc(100vh - 60px);
+            overflow-y: auto;
+        }
+        .sidebar-section {
+            margin-bottom: 28px;
+        }
+        .sidebar-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        .sidebar-links {
+            list-style: none;
+        }
+        .sidebar-links li {
+            margin-bottom: 6px;
+        }
+        .sidebar-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            padding: 6px 10px;
+            border-radius: 4px;
+            transition: all 0.15s;
+        }
+        .sidebar-links a:hover {
+            background: rgba(139, 69, 19, 0.08);
+            color: var(--accent);
+        }
+        .content {
+            flex: 1;
+            padding: 40px 50px;
+            max-width: 900px;
+        }
+        .page-header {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border);
+        }
+        .page-header h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+        .page-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+        /* 阶段标题 */
+        .phase-section {
+            margin-bottom: 50px;
+        }
+        .phase-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+            padding: 16px 20px;
+            border-radius: 8px;
+        }
+        .phase-header.phase-1 {
+            background: var(--phase1-bg);
+            border-left: 4px solid #e67e22;
+        }
+        .phase-header.phase-2 {
+            background: var(--phase2-bg);
+            border-left: 4px solid #3498db;
+        }
+        .phase-icon {
+            font-size: 1.8rem;
+            margin-right: 16px;
+        }
+        .phase-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        .phase-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        /* 时间线 */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+        .timeline-year-group {
+            margin-bottom: 30px;
+        }
+        .timeline-year-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+            position: relative;
+        }
+        .timeline-year-header::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 3px solid var(--bg);
+        }
+        .year-badge {
+            background: var(--accent);
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .year-link {
+            margin-left: 12px;
+            color: var(--link);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .year-link:hover {
+            text-decoration: underline;
+        }
+        .timeline-items {
+            padding-left: 10px;
+        }
+        .timeline-item {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            transition: all 0.2s;
+        }
+        .timeline-item:hover {
+            border-color: var(--accent-light);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .item-title {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+        .item-title a {
+            color: var(--link);
+            text-decoration: none;
+        }
+        .item-title a:hover {
+            text-decoration: underline;
+        }
+        .item-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        .item-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .item-tag {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            color: var(--text-muted);
+        }
+        /* 统计信息 */
+        .stats-bar {
+            display: flex;
+            gap: 40px;
+            padding: 20px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        @media (max-width: 1024px) {
+            .sidebar { display: none; }
+            .content { padding: 30px; }
+        }
+        @media (max-width: 768px) {
+            .top-nav { padding: 0 20px; }
+            .nav-links { gap: 16px; }
+            .nav-links a { font-size: 0.8rem; }
+            .content { padding: 20px; }
+            .stats-bar { flex-direction: column; gap: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">段永平智慧库 <span>大道无形我有型</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="timeline.html" class="active">时间线</a></li>
+                <li><a href="concepts.html">核心概念</a></li>
+                <li><a href="companies.html">公司案例</a></li>
+                <li><a href="people.html">人物索引</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">快速跳转</div>
+                <ul class="sidebar-links">
+                    <li><a href="#phase1">早期投资阶段</a></li>
+                    <li><a href="#phase2">雪球问答阶段</a></li>
+                </ul>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-title">重要年份</div>
+                <ul class="sidebar-links">
+                    <li><a href="#y1999">1999 网易投资</a></li>
+                    <li><a href="#y2006">2006 巴菲特午餐</a></li>
+                    <li><a href="#y2007">2007 投资苹果</a></li>
+                    <li><a href="#y2010">2010 入驻雪球</a></li>
+                    <li><a href="#y2013">2013 重仓茅台</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="content">
+            <div class="page-header">
+                <h1>📅 投资时间线</h1>
+                <p>按时间顺序整理段永平的投资历程与公开发言</p>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label">投资年限</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">47</div>
+                    <div class="stat-label">年份文档</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-label">问答记录</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">核心概念</div>
+                </div>
+            </div>
+
+            <!-- 早期投资阶段 -->
+            <section class="phase-section" id="phase1">
+                <div class="phase-header phase-1">
+                    <div class="phase-icon">🚀</div>
+                    <div>
+                        <div class="phase-title">早期投资阶段（1999-2009）</div>
+                        <div class="phase-subtitle">从实业家到投资家的转型期</div>
+                    </div>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-year-group" id="y1999">
+                        <div class="timeline-year-header">
+                            <span class="year-badge">1999</span>
+                        </div>
+                        <div class="timeline-items">
+                            <div class="timeline-item">
+                                <div class="item-title"><a href="companies.html#netease">网易投资 - 一战成名</a></div>
+                                <div class="item-desc">在互联网泡沫破裂后，段永平以约1美元的价格重仓网易，最终获得数十倍回报。这是他从实业家转型为投资家的标志性战役。</div>
+                                <div class="item-tags">
+                                    <span class="item-tag">网易</span>
+                                    <span class="item-tag">价值投资</span>
+                                    <span class="item-tag">一战成名</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-year-group" id="y2001">
+                        <div class="timeline-year-header">
+                            <span class="year-badge">2001</span>
+                        </div>
+                        <div class="timeline-items">
+                            <div class="timeline-item">
+                                <div class="item-title">段永平致网友信</div>
+                                <div class="item-desc">早期在互联网上分享投资理念，开始建立"大道"的个人品牌。</div>
+                                <div class="item-tags">
+                                    <span class="item-tag">早期分享</span>
+                                    <span class="item-tag">投资理念</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-year-group" id="y2006">
+                        <div class="timeline-year-header">
+                            <span class="year-badge">2006</span>
+                        </div>
+                        <div class="timeline-items">
+                            <div class="timeline-item">
+                                <div class="item-title"><a href="people.html#buffett">巴菲特午餐 - 62万美元</a></div>
+                                <div class="item-desc">以62万美元拍下与巴菲特共进午餐的机会，这次会面深刻影响了段永平的投资哲学，确立了"买股票就是买公司"的核心理念。</div>
+                                <div class="item-tags">
+                                    <span class="item-tag">巴菲特</span>
+                                    <span class="item-tag">价值投资</span>
+                                    <span class="item-tag">里程碑</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-year-group" id="y2007">
+                        <div class="timeline-year-header">
+                            <span class="year-badge">2007</span>
+                        </div>
+                        <div class="timeline-items">
+                            <div class="timeline-item">
+                                <div class="item-title"><a href="companies.html#apple">投资苹果 - 开始重仓</a></div>
+                                <div class="item-desc">在iPhone发布后识别到苹果的生态护城河，开始重仓持有苹果股票，并长期持有至今。</div>
+                                <div class="item-tags">
+                                    <span class="item-tag">苹果</span>
+                                    <span class="item-tag">护城河</span>
+                                    <span class="item-tag">长期持有</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 雪球问答阶段 -->
+            <section class="phase-section" id="phase2">
+                <div class="phase-header phase-2">
+                    <div class="phase-icon">💬</div>
+                    <div>
+                        <div class="phase-title">雪球/公开问答阶段（2010-2026）</div>
+                        <div class="phase-subtitle">以"大道无形我有型"身份持续分享投资智慧</div>
+                    </div>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-year-group" id="y2010">
+                        <div class="timeline-year-header">
+                            <span class="year-badge">2010</span>
+                            <a href="sayings/段永平投资箴言2010年上.html" class="year-link">查看原文 →</a>
+                        </div>
+                        <div class="timeline-items">
+                            <div class="timeline-item">
+                                <div class="item-title">入驻雪球 - 开始公开分享</div>
+                                <div class="item-desc">以"大道无形我有型"的ID入驻雪球，开始系统性地回答网友关于投资的问题，分享对茅台、苹果等公司的看法。</div>
+                                <div class="item-tags">
+                                    <span class="item-tag">雪球</span>
+                                    <span class="item-tag">茅台</span>
+                                    <span class="item-tag">苹果</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-year-group" id="y2011">
+                        <div class="timeline-year-header">
+                            <span class="year-badge">2011</span>
+                            <a href="sayings/段永平投资箴言2011年上.html" class="year-link">查看原文 →</a>
+                        </div>
+                        <div class="timeline-items">
+                            <div class="timeline-item">
+                                <div class="item-title">持续分享投资理念</div>
+                                <div class="item-desc">深入阐述"本分"、"平常心"等核心投资哲学概念，回答网友关于能力圈、安全边际等问题。</div>
+                                <div class="item-tags">
+                                    <span class="item-tag">本分</span>
+                                    <span class="item-tag">平常心</span>
+                                    <span class="item-tag">能力圈</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-year-group" id="y2012">
+                        <div class="timeline-year-header">
+                            <span class="year-badge">2012</span>
+                            <a href="sayings/段永平投资箴言2012年上.html" class="year-link">查看原文 →</a>
+                        </div>
+                        <div class="timeline-items">
+                            <div class="timeline-item">
+                                <div class="item-title">投资方法论深化</div>
+                                <div class="item-desc">进一步阐述"买股票就是买公司"、"不懂不做"等核心原则，分享对腾讯等公司的初步看法。</div>
+                                <div class="item-tags">
+                                    <span class="item-tag">腾讯</span>
+                                    <span class="item-tag">不懂不做</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-year-group" id="y2013">
+                        <div class="timeline-year-header">
+                            <span class="year-badge">2013</span>
+                            <a href="sayings/段永平投资箴言2013年上.html" class="year-link">查看原文 →</a>
+                        </div>
+                        <div class="timeline-items">
+                            <div class="timeline-item">
+                                <div class="item-title"><a href="companies.html#maotai">重仓茅台</a></div>
+                                <div class="item-desc">在白酒行业遭遇塑化剂危机、限制三公消费等利空时，坚定持有并加仓茅台，展现长期投资的定力。</div>
+                                <div class="item-tags">
+                                    <span class="item-tag">茅台</span>
+                                    <span class="item-tag">长期主义</span>
+                                    <span class="item-tag">逆向投资</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-year-group" id="y2017">
+                        <div class="timeline-year-header">
+                            <span class="year-badge">2017</span>
+                            <a href="sayings/段永平投资箴言2017年.html" class="year-link">查看原文 →</a>
+                        </div>
+                        <div class="timeline-items">
+                            <div class="timeline-item">
+                                <div class="item-title">对苹果生态的深度理解</div>
+                                <div class="item-desc">深入分析苹果的商业模式和护城河，阐述为什么苹果是一家"好公司"。</div>
+                                <div class="item-tags">
+                                    <span class="item-tag">苹果</span>
+                                    <span class="item-tag">商业模式</span>
+                                    <span class="item-tag">护城河</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-year-group" id="y2018">
+                        <div class="timeline-year-header">
+                            <span class="year-badge">2018</span>
+                            <a href="sayings/段永平投资箴言2018年.html" class="year-link">查看原文 →</a>
+                        </div>
+                        <div class="timeline-items">
+                            <div class="timeline-item">
+                                <div class="item-title">投资腾讯的思考</div>
+                                <div class="item-desc">分享对腾讯游戏业务、微信生态的理解，以及为什么选择在此时投资腾讯。</div>
+                                <div class="item-tags">
+                                    <span class="item-tag">腾讯</span>
+                                    <span class="item-tag">游戏</span>
+                                    <span class="item-tag">微信</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-year-group" id="y2019">
+                        <div class="timeline-year-header">
+                            <span class="year-badge">2019</span>
+                            <a href="sayings/段永平投资箴言2019年一.html" class="year-link">查看原文 →</a>
+                        </div>
+                        <div class="timeline-items">
+                            <div class="timeline-item">
+                                <div class="item-title">对拼多多的看法</div>
+                                <div class="item-desc">作为拼多多早期投资人，分享对黄峥和拼多多商业模式的理解，阐述"本分"在拼多多企业文化中的体现。</div>
+                                <div class="item-tags">
+                                    <span class="item-tag">拼多多</span>
+                                    <span class="item-tag">黄峥</span>
+                                    <span class="item-tag">企业文化</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-year-group" id="y2020">
+                        <div class="timeline-year-header">
+                            <span class="year-badge">2020</span>
+                            <a href="sayings/段永平投资箴言2020年一.html" class="year-link">查看原文 →</a>
+                        </div>
+                        <div class="timeline-items">
+                            <div class="timeline-item">
+                                <div class="item-title">疫情下的投资思考</div>
+                                <div class="item-desc">分享对疫情影响的看法，强调"平常心"面对市场波动，继续看好苹果、茅台等核心持仓。</div>
+                                <div class="item-tags">
+                                    <span class="item-tag">疫情</span>
+                                    <span class="item-tag">平常心</span>
+                                    <span class="item-tag">波动</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-year-group" id="y2023">
+                        <div class="timeline-year-header">
+                            <span class="year-badge">2023</span>
+                            <a href="sayings/段永平投资箴言2023年一.html" class="year-link">查看原文 →</a>
+                        </div>
+                        <div class="timeline-items">
+                            <div class="timeline-item">
+                                <div class="item-title">对AI和自动驾驶的看法</div>
+                                <div class="item-desc">分享对特斯拉自动驾驶、AI发展的观点，认为完全自动驾驶20年内难以实现，但辅助驾驶可以做得很好。</div>
+                                <div class="item-tags">
+                                    <span class="item-tag">特斯拉</span>
+                                    <span class="item-tag">AI</span>
+                                    <span class="item-tag">自动驾驶</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="item-title">茅台与网易合作游戏</div>
+                                <div class="item-desc">点评茅台和网易合作的"巽风数字世界"，展现对跨界合作的敏锐观察。</div>
+                                <div class="item-tags">
+                                    <span class="item-tag">茅台</span>
+                                    <span class="item-tag">网易</span>
+                                    <span class="item-tag">游戏</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-year-group" id="y2024">
+                        <div class="timeline-year-header">
+                            <span class="year-badge">2024</span>
+                            <a href="sayings/段永平投资箴言2024年1.html" class="year-link">查看原文 →</a>
+                        </div>
+                        <div class="timeline-items">
+                            <div class="timeline-item">
+                                <div class="item-title">持续分享投资智慧</div>
+                                <div class="item-desc">继续回答网友提问，分享对腾讯、阿里、拼多多等中概股的最新看法。</div>
+                                <div class="item-tags">
+                                    <span class="item-tag">腾讯</span>
+                                    <span class="item-tag">阿里</span>
+                                    <span class="item-tag">拼多多</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-year-group" id="y2026">
+                        <div class="timeline-year-header">
+                            <span class="year-badge">2026</span>
+                            <a href="sayings/2026段永平.html" class="year-link">查看原文 →</a>
+                        </div>
+                        <div class="timeline-items">
+                            <div class="timeline-item">
+                                <div class="item-title">最新投资思考</div>
+                                <div class="item-desc">最新的投资问答和观点分享。</div>
+                                <div class="item-tags">
+                                    <span class="item-tag">最新</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

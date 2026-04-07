@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>核心概念 | 段永平投资智慧库</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #faf9f6;
+            --bg-secondary: #f5f4f0;
+            --text: #2c2c2c;
+            --text-secondary: #5a5a5a;
+            --text-muted: #888;
+            --accent: #8b4513;
+            --accent-light: #d4a574;
+            --border: #e0ddd5;
+            --link: #8b4513;
+            --link-hover: #a0522d;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+        }
+        .top-nav {
+            background: #fff;
+            border-bottom: 1px solid var(--border);
+            padding: 0 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            height: 60px;
+        }
+        .nav-brand {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            margin-right: 40px;
+        }
+        .nav-brand span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-left: 8px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            min-height: calc(100vh - 60px);
+        }
+        .sidebar {
+            width: 280px;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border);
+            padding: 30px 24px;
+            position: sticky;
+            top: 60px;
+            height: calc(100vh - 60px);
+            overflow-y: auto;
+        }
+        .sidebar-section {
+            margin-bottom: 28px;
+        }
+        .sidebar-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        .sidebar-links {
+            list-style: none;
+        }
+        .sidebar-links li {
+            margin-bottom: 6px;
+        }
+        .sidebar-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            padding: 6px 10px;
+            border-radius: 4px;
+            transition: all 0.15s;
+        }
+        .sidebar-links a:hover {
+            background: rgba(139, 69, 19, 0.08);
+            color: var(--accent);
+        }
+        .content {
+            flex: 1;
+            padding: 40px 50px;
+            max-width: 900px;
+        }
+        .page-header {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border);
+        }
+        .page-header h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+        .page-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+        /* 概念卡片 */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 24px;
+            margin-top: 30px;
+        }
+        .concept-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            transition: all 0.3s;
+        }
+        .concept-card:hover {
+            border-color: var(--accent-light);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transform: translateY(-3px);
+        }
+        .concept-card.highlight {
+            border-left: 4px solid var(--accent);
+        }
+        .concept-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .concept-icon {
+            font-size: 2rem;
+            margin-right: 12px;
+        }
+        .concept-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .concept-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .concept-definition {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-light);
+        }
+        .concept-section {
+            margin-bottom: 16px;
+        }
+        .concept-section-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .concept-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .concept-link {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .concept-link:hover {
+            background: var(--accent);
+            color: #fff;
+        }
+        .concept-quote {
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            padding: 12px;
+            background: #fffbf0;
+            border-radius: 8px;
+            margin-top: 12px;
+        }
+        /* 概念云 */
+        .concept-cloud-section {
+            margin: 40px 0;
+            padding: 30px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+        .cloud-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+        .cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+        .cloud-tag {
+            display: inline-block;
+            padding: 8px 18px;
+            background: var(--bg-secondary);
+            border-radius: 24px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .cloud-tag:hover {
+            background: var(--accent);
+            color: #fff;
+            transform: scale(1.05);
+        }
+        .cloud-tag.xl { font-size: 1.3rem; padding: 12px 24px; }
+        .cloud-tag.lg { font-size: 1.1rem; padding: 10px 20px; }
+        .cloud-tag.md { font-size: 0.95rem; }
+        .cloud-tag.sm { font-size: 0.85rem; padding: 6px 14px; }
+        @media (max-width: 1024px) {
+            .sidebar { display: none; }
+            .content { padding: 30px; }
+            .concept-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .top-nav { padding: 0 20px; }
+            .nav-links { gap: 16px; }
+            .nav-links a { font-size: 0.8rem; }
+            .content { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">段永平智慧库 <span>大道无形我有型</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="timeline.html">时间线</a></li>
+                <li><a href="concepts.html" class="active">核心概念</a></li>
+                <li><a href="companies.html">公司案例</a></li>
+                <li><a href="people.html">人物索引</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">核心概念</div>
+                <ul class="sidebar-links">
+                    <li><a href="#benfen">本分</a></li>
+                    <li><a href="#pingchangxin">平常心</a></li>
+                    <li><a href="#nengliquan">能力圈</a></li>
+                    <li><a href="#hechenghe">护城河</a></li>
+                    <li><a href="#qiyewenhua">企业文化</a></li>
+                    <li><a href="#changqizhuyi">长期主义</a></li>
+                    <li><a href="#anquanbianji">安全边际</a></li>
+                    <li><a href="#stopdoing">Stop Doing List</a></li>
+                </ul>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-title">相关页面</div>
+                <ul class="sidebar-links">
+                    <li><a href="timeline.html">时间线</a></li>
+                    <li><a href="companies.html">公司案例</a></li>
+                    <li><a href="people.html">人物索引</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="content">
+            <div class="page-header">
+                <h1>💡 核心投资概念</h1>
+                <p>段永平投资哲学的八大核心概念，构建完整的价值投资思维框架</p>
+            </div>
+
+            <!-- 概念云 -->
+            <div class="concept-cloud-section">
+                <div class="cloud-title">概念云</div>
+                <div class="cloud">
+                    <a href="#benfen" class="cloud-tag xl">本分</a>
+                    <a href="#pingchangxin" class="cloud-tag xl">平常心</a>
+                    <a href="#nengliquan" class="cloud-tag lg">能力圈</a>
+                    <a href="#hechenghe" class="cloud-tag lg">护城河</a>
+                    <a href="#qiyewenhua" class="cloud-tag md">企业文化</a>
+                    <a href="#changqizhuyi" class="cloud-tag md">长期主义</a>
+                    <a href="#anquanbianji" class="cloud-tag sm">安全边际</a>
+                    <a href="#stopdoing" class="cloud-tag sm">Stop Doing List</a>
+                </div>
+            </div>
+
+            <!-- 概念卡片 -->
+            <div class="concept-grid">
+                <!-- 本分 -->
+                <div class="concept-card highlight" id="benfen">
+                    <div class="concept-header">
+                        <div class="concept-icon">🎯</div>
+                        <div>
+                            <div class="concept-title">本分</div>
+                            <div class="concept-subtitle">Core Value</div>
+                        </div>
+                    </div>
+                    <div class="concept-definition">
+                        "本分"是段永平投资哲学的核心。做对的事情，把事情做对。明知错的事情就不做，发现错了就改。
+                    </div>
+                    <div class="concept-section">
+                        <div class="concept-section-title">相关公司</div>
+                        <div class="concept-links">
+                            <a href="companies.html#apple" class="concept-link">苹果</a>
+                            <a href="companies.html#maotai" class="concept-link">茅台</a>
+                            <a href="companies.html#pdd" class="concept-link">拼多多</a>
+                        </div>
+                    </div>
+                    <div class="concept-section">
+                        <div class="concept-section-title">相关人物</div>
+                        <div class="concept-links">
+                            <a href="people.html#huangzheng" class="concept-link">黄峥</a>
+                        </div>
+                    </div>
+                    <div class="concept-quote">
+                        "本分就是做对的事情，把事情做对。明知是错的事情就不做，发现错了就改。"
+                    </div>
+                </div>
+
+                <!-- 平常心 -->
+                <div class="concept-card highlight" id="pingchangxin">
+                    <div class="concept-header">
+                        <div class="concept-icon">☯️</div>
+                        <div>
+                            <div class="concept-title">平常心</div>
+                            <div class="concept-subtitle">Normal Mind</div>
+                        </div>
+                    </div>
+                    <div class="concept-definition">
+                        保持平常心，理性看待市场波动。不为短期涨跌所动，专注于企业的长期价值。
+                    </div>
+                    <div class="concept-section">
+                        <div class="concept-section-title">相关年份</div>
+                        <div class="concept-links">
+                            <a href="sayings/段永平投资箴言2013年上.html" class="concept-link">2013 塑化剂危机</a>
+                            <a href="sayings/段永平投资箴言2020年一.html" class="concept-link">2020 疫情</a>
+                        </div>
+                    </div>
+                    <div class="concept-section">
+                        <div class="concept-section-title">相关概念</div>
+                        <div class="concept-links">
+                            <a href="#changqizhuyi" class="concept-link">长期主义</a>
+                            <a href="#anquanbianji" class="concept-link">安全边际</a>
+                        </div>
+                    </div>
+                    <div class="concept-quote">
+                        "保持平常心，回到事物的本质去思考。"
+                    </div>
+                </div>
+
+                <!-- 能力圈 -->
+                <div class="concept-card" id="nengliquan">
+                    <div class="concept-header">
+                        <div class="concept-icon">⭕</div>
+                        <div>
+                            <div class="concept-title">能力圈</div>
+                            <div class="concept-subtitle">Circle of Competence</div>
+                        </div>
+                    </div>
+                    <div class="concept-definition">
+                        只投资自己能看懂的企业。不懂不做，不投看不懂的生意，即使别人赚得再多也不羡慕。
+                    </div>
+                    <div class="concept-section">
+                        <div class="concept-section-title">实践案例</div>
+                        <div class="concept-links">
+                            <a href="companies.html#apple" class="concept-link">苹果（看懂）</a>
+                            <a href="companies.html#maotai" class="concept-link">茅台（看懂）</a>
+                            <a href="companies.html#tencent" class="concept-link">腾讯（看懂）</a>
+                        </div>
+                    </div>
+                    <div class="concept-section">
+                        <div class="concept-section-title">相关概念</div>
+                        <div class="concept-links">
+                            <a href="#stopdoing" class="concept-link">Stop Doing List</a>
+                        </div>
+                    </div>
+                    <div class="concept-quote">
+                        "不懂不做，这是最重要的原则。"
+                    </div>
+                </div>
+
+                <!-- 护城河 -->
+                <div class="concept-card" id="hechenghe">
+                    <div class="concept-header">
+                        <div class="concept-icon">🏰</div>
+                        <div>
+                            <div class="concept-title">护城河</div>
+                            <div class="concept-subtitle">Moat</div>
+                        </div>
+                    </div>
+                    <div class="concept-definition">
+                        企业的竞争优势和进入壁垒。包括品牌、网络效应、成本优势、转换成本等。
+                    </div>
+                    <div class="concept-section">
+                        <div class="concept-section-title">典型案例</div>
+                        <div class="concept-links">
+                            <a href="companies.html#apple" class="concept-link">苹果 - 生态系统</a>
+                            <a href="companies.html#maotai" class="concept-link">茅台 - 品牌护城河</a>
+                            <a href="companies.html#tencent" class="concept-link">腾讯 - 网络效应</a>
+                        </div>
+                    </div>
+                    <div class="concept-quote">
+                        "投资最重要的是看企业有没有护城河。"
+                    </div>
+                </div>
+
+                <!-- 企业文化 -->
+                <div class="concept-card" id="qiyewenhua">
+                    <div class="concept-header">
+                        <div class="concept-icon">🌱</div>
+                        <div>
+                            <div class="concept-title">企业文化</div>
+                            <div class="concept-subtitle">Corporate Culture</div>
+                        </div>
+                    </div>
+                    <div class="concept-definition">
+                        企业的核心价值观和行为准则。好的企业文化能够吸引和留住人才，推动企业长期发展。
+                    </div>
+                    <div class="concept-section">
+                        <div class="concept-section-title">典型企业</div>
+                        <div class="concept-links">
+                            <a href="companies.html#apple" class="concept-link">苹果</a>
+                            <a href="companies.html#pdd" class="concept-link">拼多多</a>
+                        </div>
+                    </div>
+                    <div class="concept-section">
+                        <div class="concept-section-title">相关概念</div>
+                        <div class="concept-links">
+                            <a href="#benfen" class="concept-link">本分</a>
+                        </div>
+                    </div>
+                    <div class="concept-quote">
+                        "企业文化是过滤器，帮助公司做正确的事情。"
+                    </div>
+                </div>
+
+                <!-- 长期主义 -->
+                <div class="concept-card" id="changqizhuyi">
+                    <div class="concept-header">
+                        <div class="concept-icon">🌳</div>
+                        <div>
+                            <div class="concept-title">长期主义</div>
+                            <div class="concept-subtitle">Long-termism</div>
+                        </div>
+                    </div>
+                    <div class="concept-definition">
+                        以长期持有为目标，不追求短期收益。相信时间是好企业的朋友，烂企业的敌人。
+                    </div>
+                    <div class="concept-section">
+                        <div class="concept-section-title">长期持有</div>
+                        <div class="concept-links">
+                            <a href="companies.html#apple" class="concept-link">苹果（10年+）</a>
+                            <a href="companies.html#maotai" class="concept-link">茅台（10年+）</a>
+                        </div>
+                    </div>
+                    <div class="concept-quote">
+                        "时间是好企业的朋友，烂企业的敌人。"
+                    </div>
+                </div>
+
+                <!-- 安全边际 -->
+                <div class="concept-card" id="anquanbianji">
+                    <div class="concept-header">
+                        <div class="concept-icon">🛡️</div>
+                        <div>
+                            <div class="concept-title">安全边际</div>
+                            <div class="concept-subtitle">Margin of Safety</div>
+                        </div>
+                    </div>
+                    <div class="concept-definition">
+                        以低于内在价值的价格买入，为未来不确定性预留缓冲空间。价格与价值的差距就是安全边际。
+                    </div>
+                    <div class="concept-section">
+                        <div class="concept-section-title">典型案例</div>
+                        <div class="concept-links">
+                            <a href="companies.html#netease" class="concept-link">网易（1美元）</a>
+                            <a href="companies.html#maotai" class="concept-link">茅台（2013年）</a>
+                        </div>
+                    </div>
+                    <div class="concept-quote">
+                        "安全边际是投资中最重要的概念之一。"
+                    </div>
+                </div>
+
+                <!-- Stop Doing List -->
+                <div class="concept-card" id="stopdoing">
+                    <div class="concept-header">
+                        <div class="concept-icon">🚫</div>
+                        <div>
+                            <div class="concept-title">Stop Doing List</div>
+                            <div class="concept-subtitle">不为清单</div>
+                        </div>
+                    </div>
+                    <div class="concept-definition">
+                        明确列出不做的事情。不懂的不做、加杠杆的不做、短期炒作不做。知道什么是错的比知道什么是对的更重要。
+                    </div>
+                    <div class="concept-section">
+                        <div class="concept-section-title">不为事项</div>
+                        <div class="concept-links">
+                            <span class="concept-link">不加杠杆</span>
+                            <span class="concept-link">不做空</span>
+                            <span class="concept-link">不懂不做</span>
+                            <span class="concept-link">不预测市场</span>
+                        </div>
+                    </div>
+                    <div class="concept-section">
+                        <div class="concept-section-title">相关概念</div>
+                        <div class="concept-links">
+                            <a href="#nengliquan" class="concept-link">能力圈</a>
+                            <a href="#benfen" class="concept-link">本分</a>
+                        </div>
+                    </div>
+                    <div class="concept-quote">
+                        "知道自己什么不能做，比知道自己能做什么更重要。"
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

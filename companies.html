@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公司案例 | 段永平投资智慧库</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #faf9f6;
+            --bg-secondary: #f5f4f0;
+            --text: #2c2c2c;
+            --text-secondary: #5a5a5a;
+            --text-muted: #888;
+            --accent: #8b4513;
+            --accent-light: #d4a574;
+            --border: #e0ddd5;
+            --link: #8b4513;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+        }
+        .top-nav {
+            background: #fff;
+            border-bottom: 1px solid var(--border);
+            padding: 0 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            height: 60px;
+        }
+        .nav-brand {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            margin-right: 40px;
+        }
+        .nav-brand span { font-size: 0.85rem; color: var(--text-muted); font-weight: 400; margin-left: 8px; }
+        .nav-links { display: flex; gap: 32px; list-style: none; }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); border-bottom-color: var(--accent); }
+        .main-container { max-width: 1400px; margin: 0 auto; display: flex; min-height: calc(100vh - 60px); }
+        .sidebar {
+            width: 280px;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border);
+            padding: 30px 24px;
+            position: sticky;
+            top: 60px;
+            height: calc(100vh - 60px);
+            overflow-y: auto;
+        }
+        .sidebar-section { margin-bottom: 28px; }
+        .sidebar-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        .sidebar-links { list-style: none; }
+        .sidebar-links li { margin-bottom: 6px; }
+        .sidebar-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            padding: 6px 10px;
+            border-radius: 4px;
+            transition: all 0.15s;
+        }
+        .sidebar-links a:hover { background: rgba(139, 69, 19, 0.08); color: var(--accent); }
+        .content { flex: 1; padding: 40px 50px; max-width: 900px; }
+        .page-header { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 2px solid var(--border); }
+        .page-header h1 { font-size: 2rem; font-weight: 600; margin-bottom: 8px; }
+        .page-header p { color: var(--text-muted); font-size: 1rem; }
+        
+        /* 公司卡片 */
+        .company-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 24px; margin-top: 30px; }
+        .company-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            transition: all 0.3s;
+        }
+        .company-card:hover {
+            border-color: var(--accent-light);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transform: translateY(-3px);
+        }
+        .company-card.highlight { border-left: 4px solid var(--accent); }
+        .company-header { display: flex; align-items: center; margin-bottom: 16px; }
+        .company-logo { font-size: 2.5rem; margin-right: 16px; }
+        .company-info h3 { font-size: 1.4rem; font-weight: 600; }
+        .company-info .ticker { font-size: 0.85rem; color: var(--text-muted); }
+        .company-stats { display: flex; gap: 20px; margin-bottom: 16px; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 1.2rem; font-weight: 600; color: var(--accent); }
+        .stat-label { font-size: 0.75rem; color: var(--text-muted); }
+        .company-desc { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 16px; }
+        .company-section { margin-bottom: 12px; }
+        .company-section-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .company-links { display: flex; flex-wrap: wrap; gap: 8px; }
+        .company-link {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .company-link:hover { background: var(--accent); color: #fff; }
+        .investment-story {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            padding: 12px;
+            background: #fffbf0;
+            border-radius: 8px;
+            margin-top: 12px;
+        }
+        @media (max-width: 1024px) {
+            .sidebar { display: none; }
+            .content { padding: 30px; }
+            .company-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">段永平智慧库 <span>大道无形我有型</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="timeline.html">时间线</a></li>
+                <li><a href="concepts.html">核心概念</a></li>
+                <li><a href="companies.html" class="active">公司案例</a></li>
+                <li><a href="people.html">人物索引</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">投资案例</div>
+                <ul class="sidebar-links">
+                    <li><a href="#apple">苹果 Apple</a></li>
+                    <li><a href="#maotai">贵州茅台</a></li>
+                    <li><a href="#netease">网易</a></li>
+                    <li><a href="#tencent">腾讯</a></li>
+                    <li><a href="#pdd">拼多多</a></li>
+                    <li><a href="#alibaba">阿里巴巴</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="content">
+            <div class="page-header">
+                <h1>🏢 公司案例库</h1>
+                <p>段永平经典投资案例，深度解析投资逻辑与决策过程</p>
+            </div>
+
+            <div class="company-grid">
+                <!-- 苹果 -->
+                <div class="company-card highlight" id="apple">
+                    <div class="company-header">
+                        <div class="company-logo">🍎</div>
+                        <div class="company-info">
+                            <h3>苹果公司</h3>
+                            <div class="ticker">AAPL · 纳斯达克</div>
+                        </div>
+                    </div>
+                    <div class="company-stats">
+                        <div class="stat">
+                            <div class="stat-value">2007</div>
+                            <div class="stat-label">首次买入</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">10年+</div>
+                            <div class="stat-label">持有年限</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">核心</div>
+                            <div class="stat-label">持仓地位</div>
+                        </div>
+                    </div>
+                    <div class="company-desc">
+                        全球市值最大的科技公司，拥有强大的生态系统护城河。iPhone、Mac、iPad、服务业务构成完整的产品矩阵，用户粘性极高。
+                    </div>
+                    <div class="company-section">
+                        <div class="company-section-title">核心投资逻辑</div>
+                        <div class="company-links">
+                            <a href="concepts.html#hechenghe" class="company-link">护城河</a>
+                            <a href="concepts.html#nengliquan" class="company-link">能力圈内</a>
+                            <a href="concepts.html#changqizhuyi" class="company-link">长期持有</a>
+                        </div>
+                    </div>
+                    <div class="company-section">
+                        <div class="company-section-title">相关年份</div>
+                        <div class="company-links">
+                            <a href="sayings/段永平投资箴言2017年.html" class="company-link">2017年</a>
+                            <a href="sayings/段永平投资箴言2023年一.html" class="company-link">2023年</a>
+                        </div>
+                    </div>
+                    <div class="investment-story">
+                        💡 <strong>投资故事：</strong>2007年iPhone发布后，段永平识别到苹果的生态护城河，开始重仓持有。他认为苹果的商业模式极其优秀，用户一旦进入生态就很难离开。
+                    </div>
+                </div>
+
+                <!-- 茅台 -->
+                <div class="company-card highlight" id="maotai">
+                    <div class="company-header">
+                        <div class="company-logo">🍶</div>
+                        <div class="company-info">
+                            <h3>贵州茅台</h3>
+                            <div class="ticker">600519 · 上交所</div>
+                        </div>
+                    </div>
+                    <div class="company-stats">
+                        <div class="stat">
+                            <div class="stat-value">2013</div>
+                            <div class="stat-label">重仓买入</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">10年+</div>
+                            <div class="stat-label">持有年限</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">核心</div>
+                            <div class="stat-label">持仓地位</div>
+                        </div>
+                    </div>
+                    <div class="company-desc">
+                        中国白酒龙头企业，拥有极强的品牌护城河和定价权。产品供不应求，毛利率高达90%以上，是现金奶牛型企业的典范。
+                    </div>
+                    <div class="company-section">
+                        <div class="company-section-title">核心投资逻辑</div>
+                        <div class="company-links">
+                            <a href="concepts.html#hechenghe" class="company-link">品牌护城河</a>
+                            <a href="concepts.html#anquanbianji" class="company-link">安全边际</a>
+                            <a href="concepts.html#pingchangxin" class="company-link">平常心</a>
+                        </div>
+                    </div>
+                    <div class="company-section">
+                        <div class="company-section-title">相关年份</div>
+                        <div class="company-links">
+                            <a href="sayings/段永平投资箴言2013年上.html" class="company-link">2013年</a>
+                            <a href="sayings/段永平投资箴言2023年一.html" class="company-link">2023年</a>
+                        </div>
+                    </div>
+                    <div class="investment-story">
+                        💡 <strong>投资故事：</strong>2013年白酒行业遭遇塑化剂危机和限制三公消费，茅台股价大跌。段永平在市场恐慌时坚定持有并加仓，展现逆向投资的定力。他认为茅台的品牌价值不会因短期事件受损。
+                    </div>
+                </div>
+
+                <!-- 网易 -->
+                <div class="company-card" id="netease">
+                    <div class="company-header">
+                        <div class="company-logo">🎮</div>
+                        <div class="company-info">
+                            <h3>网易</h3>
+                            <div class="ticker">NTES · 纳斯达克</div>
+                        </div>
+                    </div>
+                    <div class="company-stats">
+                        <div class="stat">
+                            <div class="stat-value">1999</div>
+                            <div class="stat-label">首次买入</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">~$1</div>
+                            <div class="stat-label">买入价格</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">数十倍</div>
+                            <div class="stat-label">投资回报</div>
+                        </div>
+                    </div>
+                    <div class="company-desc">
+                        中国领先的互联网公司，游戏业务为核心收入来源。段永平的成名之战，在互联网泡沫破裂后重仓网易。
+                    </div>
+                    <div class="company-section">
+                        <div class="company-section-title">核心投资逻辑</div>
+                        <div class="company-links">
+                            <a href="concepts.html#anquanbianji" class="company-link">安全边际</a>
+                            <a href="concepts.html#changqizhuyi" class="company-link">逆向投资</a>
+                        </div>
+                    </div>
+                    <div class="investment-story">
+                        💡 <strong>投资故事：</strong>互联网泡沫破裂后，网易股价跌至约1美元。段永平深入研究后发现网易的游戏业务价值被严重低估，果断重仓，最终获得数十倍回报。这是他从实业家转型为投资家的标志性战役。
+                    </div>
+                </div>
+
+                <!-- 腾讯 -->
+                <div class="company-card" id="tencent">
+                    <div class="company-header">
+                        <div class="company-logo">💬</div>
+                        <div class="company-info">
+                            <h3>腾讯控股</h3>
+                            <div class="ticker">0700 · 港交所</div>
+                        </div>
+                    </div>
+                    <div class="company-stats">
+                        <div class="stat">
+                            <div class="stat-value">2018</div>
+                            <div class="stat-label">开始关注</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">长期</div>
+                            <div class="stat-label">投资态度</div>
+                        </div>
+                    </div>
+                    <div class="company-desc">
+                        中国最大的社交和游戏公司，微信拥有超过10亿用户。游戏业务贡献主要利润，微信生态构建强大网络效应。
+                    </div>
+                    <div class="company-section">
+                        <div class="company-section-title">核心投资逻辑</div>
+                        <div class="company-links">
+                            <a href="concepts.html#hechenghe" class="company-link">网络效应</a>
+                            <a href="concepts.html#nengliquan" class="company-link">能力圈</a>
+                        </div>
+                    </div>
+                    <div class="company-section">
+                        <div class="company-section-title">相关年份</div>
+                        <div class="company-links">
+                            <a href="sayings/段永平投资箴言2018年.html" class="company-link">2018年</a>
+                            <a href="sayings/段永平投资箴言2024年1.html" class="company-link">2024年</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 拼多多 -->
+                <div class="company-card" id="pdd">
+                    <div class="company-header">
+                        <div class="company-logo">🍊</div>
+                        <div class="company-info">
+                            <h3>拼多多</h3>
+                            <div class="ticker">PDD · 纳斯达克</div>
+                        </div>
+                    </div>
+                    <div class="company-stats">
+                        <div class="stat">
+                            <div class="stat-value">早期</div>
+                            <div class="stat-label">投资人</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">黄峥</div>
+                            <div class="stat-label">创始人</div>
+                        </div>
+                    </div>
+                    <div class="company-desc">
+                        中国领先的社交电商平台，以"本分"为企业文化核心。段永平是拼多多早期投资人，与创始人黄峥关系密切。
+                    </div>
+                    <div class="company-section">
+                        <div class="company-section-title">核心投资逻辑</div>
+                        <div class="company-links">
+                            <a href="concepts.html#benfen" class="company-link">本分文化</a>
+                            <a href="concepts.html#qiyewenhua" class="company-link">企业文化</a>
+                        </div>
+                    </div>
+                    <div class="company-section">
+                        <div class="company-section-title">相关人物</div>
+                        <div class="company-links">
+                            <a href="people.html#huangzheng" class="company-link">黄峥</a>
+                        </div>
+                    </div>
+                    <div class="investment-story">
+                        💡 <strong>投资故事：</strong>段永平是黄峥的导师和朋友，非常认可拼多多"本分"的企业文化。他认为拼多多抓住了中国下沉市场的机会，商业模式简洁有效。
+                    </div>
+                </div>
+
+                <!-- 阿里巴巴 -->
+                <div class="company-card" id="alibaba">
+                    <div class="company-header">
+                        <div class="company-logo">🛒</div>
+                        <div class="company-info">
+                            <h3>阿里巴巴</h3>
+                            <div class="ticker">BABA · 纽交所</div>
+                        </div>
+                    </div>
+                    <div class="company-desc">
+                        中国最大的电商平台，业务涵盖电商、云计算、金融科技等。段永平对阿里的看法较为复杂，认为其商业模式不如腾讯清晰。
+                    </div>
+                    <div class="company-section">
+                        <div class="company-section-title">相关年份</div>
+                        <div class="company-links">
+                            <a href="sayings/段永平投资箴言2024年1.html" class="company-link">2024年</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

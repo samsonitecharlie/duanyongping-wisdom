@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>拼多多</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<button class="hamburger" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+
+<aside class="sidebar" id="sidebar">
+<div class="sidebar-header"><a href="../index.html" class="logo">段永平智慧库</a><div class="logo-sub">大道无形我有型</div></div>
+<div class="sidebar-nav">
+<a href="../index.html" class="nav-link nav-home">🏠 首页</a>
+<div class="nav-group">
+<div class="nav-group-title" onclick="toggle('grp_sayings')"><span class="caret"></span>投资箴言</div>
+<div class="nav-group-items" id="grp_sayings"><a href="../sayings/index.html" class="nav-link">投资箴言总览</a></div>
+</div>
+<div class="nav-group">
+<div class="nav-group-title" onclick="toggle('grp_blog')"><span class="caret"></span>博客文章</div>
+<div class="nav-group-items" id="grp_blog"><a href="../blog/index.html" class="nav-link">博客文章合集</a></div>
+</div>
+<div class="nav-group">
+<div class="nav-group-title" onclick="toggle('grp_weibo')"><span class="caret"></span>微博语录</div>
+<div class="nav-group-items" id="grp_weibo"><a href="../weibo/index.html" class="nav-link">微博语录</a></div>
+</div>
+<div class="nav-group">
+<div class="nav-group-title" onclick="toggle('grp_qa')"><span class="caret"></span>投资问答</div>
+<div class="nav-group-items" id="grp_qa"><a href="../qa/index.html" class="nav-link">投资问答总览</a></div>
+</div>
+<div class="nav-group">
+<div class="nav-group-title" onclick="toggle('grp_interview')"><span class="caret"></span>访谈记录</div>
+<div class="nav-group-items" id="grp_interview"><a href="../interview/index.html" class="nav-link">访谈记录</a></div>
+</div>
+<div class="nav-group">
+<div class="nav-group-title" onclick="toggle('grp_speech')"><span class="caret"></span>演讲分享</div>
+<div class="nav-group-items" id="grp_speech"><a href="../speech/index.html" class="nav-link">演讲分享</a></div>
+</div>
+</div>
+</aside>
+
+<main class="main">
+<div class="meta">
+<span class="type-badge type-公司">公司</span>
+
+</div>
+<article class="article">
+<h1>拼多多</h1>
+
+<h2>投资时间线</h2>
+
+<h2>段永平观点</h2>
+
+<h2>相关概念</h2>
+<ul><li>[[护城河]]</li>
+<li>[[商业模式]]</li>
+</ul>
+</article>
+</main>
+<script>
+function toggle(id) {
+    const el = document.getElementById(id);
+    const title = el.previousElementSibling;
+    el.classList.toggle('open');
+    title.classList.toggle('open');
+}
+</script>
+</body>
+</html>

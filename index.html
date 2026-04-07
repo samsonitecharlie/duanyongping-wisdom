@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>段永平投资智慧库 | 大道无形我有型</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #faf9f6;
+            --bg-secondary: #f5f4f0;
+            --text: #2c2c2c;
+            --text-secondary: #5a5a5a;
+            --text-muted: #888;
+            --accent: #8b4513;
+            --accent-light: #d4a574;
+            --border: #e0ddd5;
+            --link: #8b4513;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+        }
+        /* 顶部导航 */
+        .top-nav {
+            background: #fff;
+            border-bottom: 1px solid var(--border);
+            padding: 0 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            height: 60px;
+        }
+        .nav-brand {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            margin-right: 40px;
+        }
+        .nav-brand span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-left: 8px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+        /* 主内容区 */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            min-height: calc(100vh - 60px);
+        }
+        /* 左侧边栏 */
+        .sidebar {
+            width: 280px;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border);
+            padding: 30px 24px;
+            position: sticky;
+            top: 60px;
+            height: calc(100vh - 60px);
+            overflow-y: auto;
+        }
+        .sidebar-section {
+            margin-bottom: 28px;
+        }
+        .sidebar-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        .sidebar-links {
+            list-style: none;
+        }
+        .sidebar-links li {
+            margin-bottom: 6px;
+        }
+        .sidebar-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            padding: 6px 10px;
+            border-radius: 4px;
+            transition: all 0.15s;
+        }
+        .sidebar-links a:hover {
+            background: rgba(139, 69, 19, 0.08);
+            color: var(--accent);
+        }
+        .sidebar-links a.active {
+            background: rgba(139, 69, 19, 0.12);
+            color: var(--accent);
+            font-weight: 500;
+        }
+        /* 右侧内容 */
+        .content {
+            flex: 1;
+            padding: 40px 50px;
+            max-width: 900px;
+        }
+        .hero {
+            text-align: center;
+            padding: 60px 0 50px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 40px;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+        .hero .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+        .hero .quote {
+            margin-top: 24px;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        /* 时间线 */
+        .timeline-section {
+            margin-bottom: 50px;
+        }
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-light);
+            display: inline-block;
+        }
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background: var(--border);
+        }
+        .timeline-item {
+            position: relative;
+            padding: 16px 0 16px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 22px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            border: 2px solid var(--bg-primary);
+        }
+        .timeline-item.highlight::before {
+            background: var(--accent);
+            width: 14px;
+            height: 14px;
+            left: -26px;
+        }
+        .timeline-year {
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .timeline-title {
+            font-size: 1.05rem;
+            color: var(--text-primary);
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+        .timeline-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        .timeline-item a {
+            color: var(--link);
+            text-decoration: none;
+        }
+        .timeline-item a:hover {
+            text-decoration: underline;
+        }
+        /* 概念云 */
+        .concept-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .concept-tag {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .concept-tag:hover {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+        .concept-tag.large {
+            font-size: 1rem;
+            padding: 10px 20px;
+        }
+        .concept-tag.small {
+            font-size: 0.8rem;
+            padding: 6px 12px;
+        }
+        /* 快速链接 */
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+        .quick-link-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.2s;
+        }
+        .quick-link-card:hover {
+            border-color: var(--accent-light);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transform: translateY(-2px);
+        }
+        .quick-link-card .icon {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .quick-link-card .title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .quick-link-card .desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        /* 响应式 */
+        @media (max-width: 1024px) {
+            .sidebar { display: none; }
+            .content { padding: 30px; }
+        }
+        @media (max-width: 768px) {
+            .top-nav { padding: 0 20px; }
+            .nav-links { gap: 20px; }
+            .nav-links a { font-size: 0.85rem; }
+            .hero h1 { font-size: 1.8rem; }
+            .content { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">段永平智慧库 <span>大道无形我有型</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">首页</a></li>
+                <li><a href="timeline.html">时间线</a></li>
+                <li><a href="concepts.html">核心概念</a></li>
+                <li><a href="companies.html">公司案例</a></li>
+                <li><a href="people.html">人物索引</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <!-- 左侧边栏 -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">年份归档</div>
+                <ul class="sidebar-links">
+                    <li><a href="sayings/2026段永平.html">2026年</a></li>
+                    <li><a href="sayings/段永平投资箴言2024年1.html">2024年</a></li>
+                    <li><a href="sayings/段永平投资箴言2023年一.html">2023年</a></li>
+                    <li><a href="sayings/段永平投资箴言2022年一.html">2022年</a></li>
+                    <li><a href="sayings/段永平投资箴言2021年上.html">2021年</a></li>
+                    <li><a href="sayings/段永平投资箴言2020年一.html">2020年</a></li>
+                    <li><a href="sayings/段永平投资箴言2019年一.html">2019年</a></li>
+                    <li><a href="sayings/段永平投资箴言2018年.html">2018年</a></li>
+                    <li><a href="sayings/段永平投资箴言2017年.html">2017年</a></li>
+                    <li><a href="sayings/段永平投资箴言2015年.html">2015年</a></li>
+                    <li><a href="sayings/段永平投资箴言2010年上.html">2010年</a></li>
+                </ul>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-title">快速导航</div>
+                <ul class="sidebar-links">
+                    <li><a href="blog/index.html">博客文章</a></li>
+                    <li><a href="weibo/index.html">微博语录</a></li>
+                    <li><a href="qa/index.html">投资问答</a></li>
+                    <li><a href="interview/index.html">访谈记录</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- 右侧内容 -->
+        <main class="content">
+            <div class="hero">
+                <h1>段永平投资智慧库</h1>
+                <p class="subtitle">大道无形我有型</p>
+                <p class="quote">"做对的事情，把事情做对"</p>
+            </div>
+
+            <!-- 时间线 -->
+            <section class="timeline-section">
+                <h2 class="section-title">📅 投资时间线</h2>
+                <div class="timeline">
+                    <div class="timeline-item highlight">
+                        <div class="timeline-year">1999</div>
+                        <div class="timeline-title"><a href="companies.html#netease">网易投资 - 一战成名</a></div>
+                        <div class="timeline-desc">在互联网泡沫破裂后重仓网易，获得数十倍回报</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2006</div>
+                        <div class="timeline-title"><a href="people.html#buffett">巴菲特午餐 - 62万美元</a></div>
+                        <div class="timeline-desc">与巴菲特共进午餐，确立价值投资理念</div>
+                    </div>
+                    <div class="timeline-item highlight">
+                        <div class="timeline-year">2007</div>
+                        <div class="timeline-title"><a href="companies.html#apple">投资苹果 - 开始重仓</a></div>
+                        <div class="timeline-desc">在iPhone发布后开始投资苹果，长期持有</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2010</div>
+                        <div class="timeline-title"><a href="sayings/段永平投资箴言2010年上.html">入驻雪球 - 开始公开分享</a></div>
+                        <div class="timeline-desc">以"大道无形我有型"身份在雪球分享投资理念</div>
+                    </div>
+                    <div class="timeline-item highlight">
+                        <div class="timeline-year">2013-2014</div>
+                        <div class="timeline-title"><a href="companies.html#maotai">重仓茅台</a></div>
+                        <div class="timeline-desc">在白酒行业低谷期坚定持有茅台</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2020-2024</div>
+                        <div class="timeline-title"><a href="timeline.html">持续分享投资智慧</a></div>
+                        <div class="timeline-desc">在雪球持续回答网友提问，分享对腾讯、阿里、拼多多等公司的看法</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 核心概念 -->
+            <section class="timeline-section">
+                <h2 class="section-title">💡 核心投资概念</h2>
+                <div class="concept-cloud">
+                    <a href="concepts.html#benfen" class="concept-tag large">本分</a>
+                    <a href="concepts.html#pingchangxin" class="concept-tag large">平常心</a>
+                    <a href="concepts.html#nengliquan" class="concept-tag">能力圈</a>
+                    <a href="concepts.html#hechenghe" class="concept-tag">护城河</a>
+                    <a href="concepts.html#qiyewenhua" class="concept-tag">企业文化</a>
+                    <a href="concepts.html#changqizhuyi" class="concept-tag">长期主义</a>
+                    <a href="concepts.html#anquanbianji" class="concept-tag small">安全边际</a>
+                    <a href="concepts.html#stopdoing" class="concept-tag">Stop Doing List</a>
+                </div>
+            </section>
+
+            <!-- 快速链接 -->
+            <section class="timeline-section">
+                <h2 class="section-title">📚 内容导航</h2>
+                <div class="quick-links">
+                    <a href="sayings/index.html" class="quick-link-card">
+                        <div class="icon">💬</div>
+                        <div class="title">投资箴言</div>
+                        <div class="desc">47篇按年份整理的问答记录</div>
+                    </a>
+                    <a href="blog/index.html" class="quick-link-card">
+                        <div class="icon">📝</div>
+                        <div class="title">博客文章</div>
+                        <div class="desc">2006-2018年博客合集</div>
+                    </a>
+                    <a href="qa/index.html" class="quick-link-card">
+                        <div class="icon">❓</div>
+                        <div class="title">投资问答</div>
+                        <div class="desc">雪球问答精选整理</div>
+                    </a>
+                    <a href="weibo/index.html" class="quick-link-card">
+                        <div class="icon">📱</div>
+                        <div class="title">微博语录</div>
+                        <div class="desc">微博精华语录汇总</div>
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

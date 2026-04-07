@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人物索引 | 段永平投资智慧库</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #faf9f6;
+            --bg-secondary: #f5f4f0;
+            --text: #2c2c2c;
+            --text-secondary: #5a5a5a;
+            --text-muted: #888;
+            --accent: #8b4513;
+            --accent-light: #d4a574;
+            --border: #e0ddd5;
+            --link: #8b4513;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+        }
+        .top-nav {
+            background: #fff;
+            border-bottom: 1px solid var(--border);
+            padding: 0 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            height: 60px;
+        }
+        .nav-brand {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            margin-right: 40px;
+        }
+        .nav-brand span { font-size: 0.85rem; color: var(--text-muted); font-weight: 400; margin-left: 8px; }
+        .nav-links { display: flex; gap: 32px; list-style: none; }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); border-bottom-color: var(--accent); }
+        .main-container { max-width: 1400px; margin: 0 auto; display: flex; min-height: calc(100vh - 60px); }
+        .sidebar {
+            width: 280px;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border);
+            padding: 30px 24px;
+            position: sticky;
+            top: 60px;
+            height: calc(100vh - 60px);
+            overflow-y: auto;
+        }
+        .sidebar-section { margin-bottom: 28px; }
+        .sidebar-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        .sidebar-links { list-style: none; }
+        .sidebar-links li { margin-bottom: 6px; }
+        .sidebar-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            padding: 6px 10px;
+            border-radius: 4px;
+            transition: all 0.15s;
+        }
+        .sidebar-links a:hover { background: rgba(139, 69, 19, 0.08); color: var(--accent); }
+        .content { flex: 1; padding: 40px 50px; max-width: 900px; }
+        .page-header { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 2px solid var(--border); }
+        .page-header h1 { font-size: 2rem; font-weight: 600; margin-bottom: 8px; }
+        .page-header p { color: var(--text-muted); font-size: 1rem; }
+        
+        /* 人物卡片 */
+        .people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 24px; margin-top: 30px; }
+        .person-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s;
+        }
+        .person-card:hover {
+            border-color: var(--accent-light);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        .person-card.highlight { border-left: 4px solid var(--accent); }
+        .person-header { display: flex; align-items: center; margin-bottom: 16px; }
+        .person-avatar { font-size: 3rem; margin-right: 16px; }
+        .person-info h3 { font-size: 1.3rem; font-weight: 600; }
+        .person-info .role { font-size: 0.85rem; color: var(--text-muted); }
+        .person-desc { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 16px; }
+        .person-section { margin-bottom: 12px; }
+        .person-section-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .person-links { display: flex; flex-wrap: wrap; gap: 8px; }
+        .person-link {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .person-link:hover { background: var(--accent); color: #fff; }
+        .relation-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        @media (max-width: 1024px) {
+            .sidebar { display: none; }
+            .content { padding: 30px; }
+            .people-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">段永平智慧库 <span>大道无形我有型</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="timeline.html">时间线</a></li>
+                <li><a href="concepts.html">核心概念</a></li>
+                <li><a href="companies.html">公司案例</a></li>
+                <li><a href="people.html" class="active">人物索引</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">核心人物</div>
+                <ul class="sidebar-links">
+                    <li><a href="#duanyongping">段永平</a></li>
+                    <li><a href="#buffett">沃伦·巴菲特</a></li>
+                    <li><a href="#munger">查理·芒格</a></li>
+                </ul>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-title">创业者</div>
+                <ul class="sidebar-links">
+                    <li><a href="#huangzheng">黄峥</a></li>
+                    <li><a href="#dinglei">丁磊</a></li>
+                    <li><a href="#maying">马云</a></li>
+                    <li><a href="#pony">马化腾</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="content">
+            <div class="page-header">
+                <h1>👥 人物索引</h1>
+                <p>段永平投资网络中的重要人物关系图谱</p>
+            </div>
+
+            <div class="people-grid">
+                <!-- 段永平 -->
+                <div class="person-card highlight" id="duanyongping">
+                    <div class="person-header">
+                        <div class="person-avatar">👤</div>
+                        <div class="person-info">
+                            <h3>段永平</h3>
+                            <div class="role">大道无形我有型 · 投资家</div>
+                        </div>
+                    </div>
+                    <div class="person-desc">
+                        步步高创始人，知名投资人。1999年投资网易一战成名，2006年与巴菲特共进午餐，确立了价值投资理念。长期持有苹果、茅台等优质公司，被誉为"中国巴菲特"。
+                    </div>
+                    <div class="person-section">
+                        <div class="person-section-title">核心投资</div>
+                        <div class="person-links">
+                            <a href="companies.html#apple" class="person-link">苹果</a>
+                            <a href="companies.html#maotai" class="person-link">茅台</a>
+                            <a href="companies.html#netease" class="person-link">网易</a>
+                            <a href="companies.html#tencent" class="person-link">腾讯</a>
+                        </div>
+                    </div>
+                    <div class="person-section">
+                        <div class="person-section-title">核心概念</div>
+                        <div class="person-links">
+                            <a href="concepts.html#benfen" class="person-link">本分</a>
+                            <a href="concepts.html#pingchangxin" class="person-link">平常心</a>
+                            <a href="concepts.html#nengliquan" class="person-link">能力圈</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 巴菲特 -->
+                <div class="person-card" id="buffett">
+                    <div class="relation-badge">导师</div>
+                    <div class="person-header">
+                        <div class="person-avatar">👴</div>
+                        <div class="person-info">
+                            <h3>沃伦·巴菲特</h3>
+                            <div class="role">Warren Buffett · 伯克希尔董事长</div>
+                        </div>
+                    </div>
+                    <div class="person-desc">
+                        全球最著名的价值投资者，伯克希尔·哈撒韦董事长。2006年段永平以62万美元拍下午餐机会，这次会面深刻影响了段永平的投资哲学。
+                    </div>
+                    <div class="person-section">
+                        <div class="person-section-title">影响</div>
+                        <div class="person-links">
+                            <a href="concepts.html#nengliquan" class="person-link">能力圈</a>
+                            <a href="concepts.html#hechenghe" class="person-link">护城河</a>
+                            <a href="concepts.html#anquanbianji" class="person-link">安全边际</a>
+                        </div>
+                    </div>
+                    <div class="person-section">
+                        <div class="person-section-title">相关时间</div>
+                        <div class="person-links">
+                            <a href="timeline.html#y2006" class="person-link">2006年午餐</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 查理·芒格 -->
+                <div class="person-card" id="munger">
+                    <div class="relation-badge">思想导师</div>
+                    <div class="person-header">
+                        <div class="person-avatar">🧠</div>
+                        <div class="person-info">
+                            <h3>查理·芒格</h3>
+                            <div class="role">Charlie Munger · 伯克希尔副董事长</div>
+                        </div>
+                    </div>
+                    <div class="person-desc">
+                        巴菲特的黄金搭档，以"多元思维模型"闻名。段永平深受芒格影响，特别认同"反过来想，总是反过来想"的思维方式。
+                    </div>
+                    <div class="person-section">
+                        <div class="person-section-title">核心思想</div>
+                        <div class="person-links">
+                            <a href="concepts.html#stopdoing" class="person-link">Stop Doing List</a>
+                            <a href="concepts.html#benfen" class="person-link">理性</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 黄峥 -->
+                <div class="person-card" id="huangzheng">
+                    <div class="relation-badge">门生/创业者</div>
+                    <div class="person-header">
+                        <div class="person-avatar">🍊</div>
+                        <div class="person-info">
+                            <h3>黄峥</h3>
+                            <div class="role">拼多多创始人</div>
+                        </div>
+                    </div>
+                    <div class="person-desc">
+                        拼多多创始人，曾是段永平的员工和学生。段永平是拼多多早期投资人，两人关系密切。黄峥将"本分"作为拼多多的企业文化核心。
+                    </div>
+                    <div class="person-section">
+                        <div class="person-section-title">相关公司</div>
+                        <div class="person-links">
+                            <a href="companies.html#pdd" class="person-link">拼多多</a>
+                        </div>
+                    </div>
+                    <div class="person-section">
+                        <div class="person-section-title">传承理念</div>
+                        <div class="person-links">
+                            <a href="concepts.html#benfen" class="person-link">本分</a>
+                            <a href="concepts.html#qiyewenhua" class="person-link">企业文化</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 丁磊 -->
+                <div class="person-card" id="dinglei">
+                    <div class="relation-badge">被投企业家</div>
+                    <div class="person-header">
+                        <div class="person-avatar">🎮</div>
+                        <div class="person-info">
+                            <h3>丁磊</h3>
+                            <div class="role">网易创始人</div>
+                        </div>
+                    </div>
+                    <div class="person-desc">
+                        网易创始人，中国互联网先驱之一。段永平在网易最困难时期投资，与丁磊建立了长期友谊。网易游戏业务成为段永平了解游戏行业的窗口。
+                    </div>
+                    <div class="person-section">
+                        <div class="person-section-title">相关公司</div>
+                        <div class="person-links">
+                            <a href="companies.html#netease" class="person-link">网易</a>
+                        </div>
+                    </div>
+                    <div class="person-section">
+                        <div class="person-section-title">相关年份</div>
+                        <div class="person-links">
+                            <a href="timeline.html#y1999" class="person-link">1999年投资</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 马化腾 -->
+                <div class="person-card" id="pony">
+                    <div class="relation-badge">被投企业家</div>
+                    <div class="person-header">
+                        <div class="person-avatar">💬</div>
+                        <div class="person-info">
+                            <h3>马化腾</h3>
+                            <div class="role">腾讯创始人</div>
+                        </div>
+                    </div>
+                    <div class="person-desc">
+                        腾讯创始人，中国互联网巨头之一。段永平对腾讯的商业模式有深入研究，认为微信的网络效应构成强大护城河。
+                    </div>
+                    <div class="person-section">
+                        <div class="person-section-title">相关公司</div>
+                        <div class="person-links">
+                            <a href="companies.html#tencent" class="person-link">腾讯</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
